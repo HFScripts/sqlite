@@ -83,3 +83,5 @@ for /f "delims=" %%f in ('dir /b /a-d *run.exe* 2^>nul') do (
 for /f "delims=" %%f in ('dir /b /a-d *output.txt* 2^>nul') do (
     del "%%f"
 )
+
+pause>nul
