@@ -8,10 +8,10 @@ $phone_pattern = '027\d{7}\b'
 $name_pattern = '[A-Za-z]+\s[A-Za-z]+$' 
 
 # Find matches for each pattern and output the results 
-$email_matches = Select-String -InputObject $content -Pattern $email_pattern -AllMatches | Foreach-Object {$_.Matches} | Foreach-Object {$_.Value} 
-$address_matches = Select-String -InputObject $content -Pattern $address_pattern -AllMatches | Foreach-Object {$_.Matches} | Foreach-Object {$_.Value} 
-$phone_matches = Select-String -InputObject $content -Pattern $phone_pattern -AllMatches | Foreach-Object {$_.Matches} | Foreach-Object {$_.Value} 
-$name_matches = Select-String -InputObject $content -Pattern $name_pattern -AllMatches | Foreach-Object {$_.Matches} | Foreach-Object {$_.Value} 
+$email_matches = Select-String -InputObject $content -Pattern $email_pattern -AllMatches | Foreach-Object {$_.Matches.Value.ToLower()} | Select-Object -Unique
+$address_matches = Select-String -InputObject $content -Pattern $address_pattern -AllMatches | Foreach-Object {$_.Matches.Value.ToLower()} | Select-Object -Unique
+$phone_matches = Select-String -InputObject $content -Pattern $phone_pattern -AllMatches | Foreach-Object {$_.Matches.Value} | Select-Object -Unique
+$name_matches = Select-String -InputObject $content -Pattern $name_pattern -AllMatches | Foreach-Object {$_.Matches.Value.ToLower()} | Select-Object -Unique
 
 # Print out the matches
 Write-Host "Email matches:"
